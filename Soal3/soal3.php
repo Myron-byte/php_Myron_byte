@@ -35,6 +35,22 @@
       border: none;
       cursor: pointer;
     }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
   </style>
 </head>
 <body>
@@ -52,6 +68,43 @@
 
     <input type="submit" value="SEARCH">
   </form>
+</div>
+
+<div class="container">
+  <h2>Registered Users</h2>
+  <table>
+    <tr>
+      <th>Nama</th>
+      <th>Alamat</th>
+      <th>Hobi</th>
+    </tr>
+    <?php
+    // Database connection
+    $servername = "localhost"; 
+    $username = "username"; 
+    $password = "password"; 
+    $dbname = "dba1";
+
+    $conn = new mysqli($servername, $username, $password, $dba1);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT nama, alamat, hobi FROM users";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            echo "<tr><td>" . $row["nama"] . "</td><td>" . $row["alamat"] . "</td><td>" . $row["hobi"] . "</td></tr>";
+        }
+    } else {
+        echo "<tr><td colspan='3'>No records found</td></tr>";
+    }
+
+    $conn->close();
+    ?>
+  </table>
 </div>
 
 </body>

@@ -6,7 +6,7 @@
 
  try{
     $pdo  = new PDO($dsn, $dbusername, $dbpassword);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_);
     } catch (PDOException $e) { 
         echo "Connection Error" . $e->getMessage();
     }
